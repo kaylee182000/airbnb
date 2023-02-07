@@ -25,6 +25,8 @@ app.use(cors({
   origin: 'http://127.0.0.1:5173',
 }));
 
+mongoose.set("strictQuery", false);
+
 mongoose.connect(process.env.MONGO_URL);
 
 function getUserDataFromReq(req) {
@@ -195,4 +197,6 @@ app.get('/bookings', async (req,res) => {
   res.json( await Booking.find({user:userData.id}).populate('place') );
 });
 
-app.listen(4000);
+app.listen(4000, () => {
+  console.log("HI")
+});
